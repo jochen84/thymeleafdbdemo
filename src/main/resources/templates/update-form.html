@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.css}"/>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+    <form th:action="@{/users/{id}/update (id=${form.userId})}" th:object="${form}" method="post">
+        <input type="hidden" th:value="${form.userId}" th:field="*{userId}"/>
+        <label for="email">Email</label>
+        <input class="form-control" type="email" id="email" th:field="*{email}"/>
+        <div class="text-danger font-weight-bold" th:if="${#fields.hasErrors('email')}">
+            <ul>
+                <li th:each="err : ${#fields.errors('email')}">
+                    <span th:text="${err}"></span>
+                </li>
+            </ul>
+        </div>
+        <label for="firstName">First name</label>
+        <input type="text" id="firstName" class="form-control" th:field="*{firstName}"/>
+        <div class="text-danger font-weight-bold" th:if="${#fields.hasErrors('firstName')}">
+            <ul>
+                <li th:each="err : ${#fields.errors('firstName')}">
+                    <span th:text="${err}"></span>
+                </li>
+            </ul>
+        </div>
+        <label for="lastName">Last name</label>
+        <input type="text" id="lastName" class="form-control" th:field="*{lastName}"/>
+        <div class="text-danger font-weight-bold" th:if="${#fields.hasErrors('lastName')}">
+            <ul>
+                <li th:each="err : ${#fields.errors('lastName')}">
+                    <span th:text="${err}"></span>
+                </li>
+            </ul>
+        </div>
+        <button class="btn btn-secondary">Submit</button>
+    </form>
+</body>
+</html>
